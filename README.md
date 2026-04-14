@@ -61,7 +61,7 @@ The simulation follows strict rules defined by the subject:
 * The simulation stops when:  
 
   * a philosopher **dies**, or  
-  * *(optional)* all philosophers have eaten a required number of times  
+  * *(optional)* all philosophers have eaten a required number of meals  
 
 ### ⏱ Timing Constraints
 
@@ -202,7 +202,7 @@ Several initial assumptions turned out to be misleading, and the final design re
 
 ### 🧵 1. Global Start Time: Fairness vs Reality
 
-Initially attempted to synchronize philosophers’ start using usleep, start barriers, or post‑creation delays—but execution order is not guaranteed in concurrency. A bug emerged: the monitor thread ran before philosophers initialized last_meal_time, causing immediate death.  
+Initially I attempted to synchronize philosophers’ start using usleep, start barriers, or post‑creation delays—but execution order is not guaranteed in concurrency. A bug emerged: the monitor thread ran before philosophers initialized last_meal_time, causing immediate death.  
 
 Solution: Redefined start time as a logical reference, not physical. Record a single timestamp before any thread creation; all philosophers initialize last_meal_time to that value; timing uses now - start_time. This eliminates uninitialized states, ensures consistent timing, and avoids reliance on OS scheduling.  
 
@@ -245,5 +245,5 @@ To meet the ≤10 ms death detection constraint, I made a key trade‑off: the
 
 ## 📬 Contact
 
-GitHub: https://github.com/wanyingcodes
+GitHub: https://github.com/wanyingcodes  
 Email: wanyingt@hotmail.com
